@@ -19,8 +19,7 @@ jobs:
       - uses: actions/checkout@v5
       - name: Test Dockerfile
         run: |
-          curl -sSfL https://github.com/aquasecurity/trivy/releases/download/v0.69.3/trivy_0.69.3_Linux-64bit.tar.gz | tar -xz trivy
-          ./trivy config \
+          docker run --rm -v "$PWD:/src" aquasec/trivy:0.69.3 config \
             --severity HIGH,CRITICAL \
             --exit-code 1 \
             Dockerfile

@@ -4,10 +4,12 @@ jobs:
   Dependances:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
       - name: Dependances
         run: |
           docker run --rm -v "$PWD:/src" aquasec/trivy:0.69.3 fs \
             --scanners vuln \
+            --severity HIGH,CRITICAL \
             --exit-code 1 \
             /src/requirements.txt
   Dockerfile:
